@@ -1,0 +1,65 @@
+/* Home page body styles - matches titlecard aesthetic */
+.home-body {
+  /* margin-top: 3rem; */
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.home-intro {
+  margin: 0 0 2.5rem 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #d4d4d4;
+  filter: blur(0.5px);
+  opacity: 85%;
+  transform: scaleX(0.82);
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+.home-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 0;
+}
+
+.home-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #d4d4d4;
+  text-decoration: none;
+  filter: blur(0.5px);
+  opacity: 80%;
+  transform: scaleX(0.85);
+  display: inline-block;
+  transition: opacity 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.home-link:hover {
+  opacity: 95%;
+  filter: blur(0.3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-intro {
+    font-size: 1rem;
+  }
+
+  .home-links {
+    gap: 2rem;
+  }
+
+  .home-link {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-links {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

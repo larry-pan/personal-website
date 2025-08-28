@@ -1,0 +1,130 @@
+/* =========================
+   CRT container + layering
+   ========================= */
+.crtRoot {
+  /* tuneables */
+  --crt-rows: 200; /* matches your React prop */
+  --scanline-opacity: 0.35; /* 0.35–0.65 sweet spot */
+  --scanline-px: 2px; /* 1.5–3px depending on DPI */
+  --grain-opacity: 0.15;
+
+  position: relative;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #0d0d0d;
+  color: #e5e5e5;
+
+  font-family: Verdana, sans-serif;
+  letter-spacing: 2px;
+
+  overflow: hidden;
+}
+
+/* Overlays stack above .content (z-index order matters with blend modes) */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.scanlinesStatic,
+.flickerRows,
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   Scanlines (darken, subtle)
+   ========================= */
+.scanlinesStatic {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: multiply;
+  opacity: var(--scanline-opacity, 0.55);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 100% calc(100% / var(--crt-rows));
+  filter: blur(0.15px);
+}
+
+/* =========================
+   Analog flicker (per-row)
+   ========================= */
+.flickerRows {
+  z-index: 3;
+  display: grid;
+  grid-template-rows: repeat(var(--crt-rows), 1fr);
+  /* soft-light gives a brightness nudge without crushing contrast */
+  mix-blend-mode: soft-light;
+}
+
+.flickerRow {
+  /* Solid fill; opacity is driven inline by React (BASE + jitter). */
+  background: #fff;
+  /* keep a default in case JS is disabled; React will overwrite */
+  opacity: 0.03;
+  will-change: opacity;
+}
+
+/* (Old path removed)
+   .flickerRow.active {}
+   @keyframes crt-row-flicker {} */
+
+/* =========================
+   Film grain (subtle)
+   ========================= */
+.grain {
+  z-index: 4;
+  /* background-image: url("https://i.imgur.com/o6vWZsM.png"); */
+  background-repeat: repeat;
+  background-size: 280px 280px; /* smaller = more visible grain */
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  /* tiny jump to keep it alive without being “animated noise” */
+  animation: grain-shift 1.3s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+  50% {
+    transform: translate(0.5px, -0.5px);
+  }
+}
+
+/* =========================
+   Typography
+   ========================= */
+.titlecard {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 3rem;
+  text-align: center;
+  filter: blur(0.75px);
+  opacity: 95%;
+  transform: scaleX(0.79);
+  display: inline-block;
+}
+
+/* =========================
+   Reduced motion
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  .scanlinesStatic,
+  .grain {
+    animation: none;
+  }
+  /* React code already zeroes the row alphas on reduce motion */
+}
