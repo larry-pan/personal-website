@@ -33,7 +33,12 @@ export default function TitleContent({ onLoadingComplete, loadingDurationMs }: T
   return (
     <div className="content">
       <h1 className="titlecard">LARRY PAN</h1>
-      <h1 className="titlecard">PERSONAL WEBSITE</h1>
+      <h1 className="titlecard-med">
+        Personal Website
+        <span className="tm" aria-hidden="true">
+          ™
+        </span>
+      </h1>
 
       <div className="crt-loading-container">
         <div className="crt-progress-bar">

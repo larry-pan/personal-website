@@ -1,45 +1,140 @@
 /* Home page body styles - matches titlecard aesthetic */
 .home-body {
-  /* margin-top: 3rem; */
   text-align: center;
   font-family: "Times New Roman", Times, serif;
 }
 
 .home-intro {
-  margin: 0 0 2.5rem 0;
+  margin: 0 0 0 0;
   font-size: 1.2rem;
   font-weight: normal;
   color: #d4d4d4;
   filter: blur(0.5px);
-  opacity: 85%;
+  opacity: 90%;
   transform: scaleX(0.82);
   display: inline-block;
   letter-spacing: 0.02em;
 }
 
-.home-links {
+/* EXTERNAL LINKS */
+.home-intro a.external-link {
+  display: inline-block; /* lets the rounded focus ring show */
+  padding: 0 0.08em; /* tiny breathing room for the ring */
+
+  color: #ffffff; /* white text */
+  filter: blur(0.25px);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+  text-decoration-color: rgba(80, 150, 255, 0.75); /* blue accent */
+  text-decoration-skip-ink: auto;
+
+  /* gentle blue CRT-ish glow to counter the parent blur */
+  text-shadow:
+    0 0 0.5px #ffffff,
+    0 0 8px rgba(80, 150, 255, 0.35);
+
+  transition:
+    text-shadow 160ms ease,
+    text-decoration-color 160ms ease,
+    opacity 160ms ease;
+}
+
+.home-intro a.external-link:visited {
+  color: #ffffff; /* keep monochrome */
+  text-decoration-color: rgba(80, 150, 255, 0.65);
+}
+
+.home-intro a.external-link:hover,
+.home-intro a.external-link:focus {
+  text-decoration-color: rgba(80, 150, 255, 0.95);
+  text-shadow:
+    0 0 1px #ffffff,
+    0 0 12px rgba(80, 150, 255, 0.55);
+}
+
+/* Rounded (pill) focus ring instead of a rectangle */
+.home-intro a.external-link:focus-visible {
+  outline: 2px solid rgba(80, 150, 255, 0.7);
+  outline-offset: 2px;
+  border-radius: 9999px; /* fully rounded */
+}
+
+.home-intro a.external-link:active {
+  opacity: 0.92;
+}
+
+/* NAV LINKS */
+/* container tweaks stay about the same */
+.page-links {
   display: flex;
   justify-content: center;
   gap: 3rem;
   margin: 0;
+  flex-wrap: wrap; /* helps on narrow screens */
 }
 
-.home-link {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #d4d4d4;
-  text-decoration: none;
-  filter: blur(0.5px);
-  opacity: 80%;
-  transform: scaleX(0.85);
+.page-link {
   display: inline-block;
-  transition: opacity 0.2s ease;
-  letter-spacing: 0.01em;
+  padding: 0.25em 0.45em; /* bigger hit area */
+  border-radius: 9999px; /* rounded for focus ring */
+  text-transform: uppercase; /* all caps */
+  letter-spacing: 0.04em; /* subtle spacing for caps */
+
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  text-decoration: none;
+
+  /* keep your CRT vibe */
+  filter: blur(0.5px);
+  opacity: 0.8;
+  transform: scaleX(0.85);
+
+  /* hairline glow so white stays crisp under blur */
+  text-shadow:
+    0 0 0.5px #ffffff,
+    0 0 6px rgba(80, 150, 255, 0.2); /* very subtle blue halo */
+
+  transition:
+    /* background-size 1000ms ease, */
+    text-shadow 100ms ease,
+    opacity 100ms ease;
 }
 
-.home-link:hover {
-  opacity: 95%;
-  filter: blur(0.3px);
+.page-link:hover,
+.page-link:focus {
+  opacity: 1;
+  text-shadow:
+    0 0 1px #ffffff,
+    0 0 10px rgba(80, 150, 255, 0.35);
+}
+
+/* Rounded focus ring (pill), monochrome + blue accent */
+.page-link:focus-visible {
+  outline: 2px solid rgba(80, 150, 255, 0.6);
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+/* Active/current page indicator — persistent underline */
+.page-link[aria-current="page"],
+.page-link.is-active {
+  opacity: 90%;
+  background-size: 100% 2px;
+  text-shadow:
+    0 0 1px #ffffff,
+    0 0 12px rgba(80, 150, 255, 0.4);
+}
+
+/* Keep visited the same for nav (monochrome) */
+.page-link:visited {
+  color: #ffffff;
+}
+
+/* Tap feedback */
+.page-link:active {
+  opacity: 90%;
 }
 
 /* Responsive adjustments */
