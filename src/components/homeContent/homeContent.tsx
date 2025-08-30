@@ -3,11 +3,11 @@ import "./home.css";
 export default function HomeContent({}) {
   return (
     <div className="content">
-      <h1 className="titlecard">LARRY PAN</h1>
+      <h1 className="titlecard" style={{ marginBottom: "-0.5rem" }}>LARRY PAN</h1>
 
       <div className="home-body" style={{ margin: "0rem" }}>
         <div className="content" style={{ marginBottom: "2rem" }}>
-          <p className="home-intro">
+          <p className="home-intro" style={{marginBottom: "1rem"}}>
             Comptuer Science @{" "}
             <a
               href="https://uwaterloo.ca/"
@@ -46,7 +46,7 @@ export default function HomeContent({}) {
           />
           <img
             src={"/pfp.png"}
-            width="175px"
+            width="130px"
             style={{
               objectFit: "contain",
               filter: "grayscale(1) " + "blur(0.5px)",
@@ -59,7 +59,7 @@ export default function HomeContent({}) {
           <a href="#" className="page-link">
             HOME
           </a>
-          <a href="#projects" className="page-link">
+          <a href="/projects/" className="page-link">
             PROJECTS
           </a>
           <a href="#contact" className="page-link">

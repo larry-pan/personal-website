@@ -1,7 +1,7 @@
 import React from "react";
-import CRTScreen from "./components/CRTScreen/crt";
-import TitleContent from "./components/titleContent/titleContent";
-import HomeContent from "./components/homeContent/homeContent";
+import CRTScreen from "./components/CRTScreen/CRT";
+import TitleContent from "./components/titleContent/TitleContent";
+import HomeContent from "./components/homeContent/HomeContent";
 
 type Scene = "title" | "black" | "main";
 
